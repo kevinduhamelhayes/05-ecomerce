@@ -1,19 +1,29 @@
+import { products as initialProducts } from './mocks/products.json'
+import { Products } from './components/Products.jsx'
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-
-import './App.css'
+import { Header } from './components/Header.jsx'
 
 function App () {
-  const [count, setCount] = useState(0)
+  const [products] = useState(initialProducts)
+  const [filter, setFilter] = useState({
+    category: 'all',
+    minPrice: 0
+
+  })
+  const filteredProducts = (product) => {
+    return product.filter(product => {
+      return (product.price >= filter.minPrice &&
+        (filter.category === 'all' || product.category === filter.category)
+      )
+    }
+    )
+  }
+  const filteretedProducts = filteredProducts(products)
 
   return (
     <>
-      <div>
-        <h1>Shopping Cart</h1>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <Header changeFilters ={setFilter}/>
+    <Products products= {filteretedProducts}/>
     </>
   )
 }
