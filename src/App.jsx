@@ -10,20 +10,20 @@ function App () {
     minPrice: 0
 
   })
-  const filteredProducts = (product) => {
-    return product.filter(product => {
+  const filterProducts = (product) => {
+    return products.filter(product => {
       return (product.price >= filter.minPrice &&
         (filter.category === 'all' || product.category === filter.category)
       )
     }
     )
   }
-  const filteretedProducts = filteredProducts(products)
+  const filteredProducts = filterProducts(products)
 
   return (
     <>
     <Header changeFilters ={setFilter}/>
-    <Products products= {filteretedProducts}/>
+    <Products products= {filteredProducts}/>
     </>
   )
 }

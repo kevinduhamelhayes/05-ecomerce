@@ -4,20 +4,19 @@ import { useState } from 'react'
 export function Filters ({ onChange }) {
   const [minPrice, setMinPrice] = useState(0)
 
-  const handleMinPrice = (event) => {
+  const handleChangeMinPrice = (event) => {
     setMinPrice(event.target.value)
-    onChange(prevState => ({ ...prevState, minPrice: event.target.value})
-    )
+    onChange(prevState => ({
+      ...prevState,
+      minPrice: event.target.value
+    }))
   }
-  
+
   const handleCategory = (event) => {
-    onChange(prevState => {
-      return {
-        ...prevState,
-        category: event.target.value
-      }
-    }
-    )
+    onChange(prevState => ({
+      ...prevState,
+      category: event.target.value
+    }))
   }
 
   return (
@@ -25,7 +24,7 @@ export function Filters ({ onChange }) {
 
       <div>
         <label htmlFor="price">A partir de</label>
-        <input type="range" name="" id="price" min="0" max="2000" onChange={handleMinPrice} />
+        <input type="range" name="" id="price" min="0" max="2000" onChange={handleChangeMinPrice} />
         <span>${minPrice}</span>
       </div>
       <div>

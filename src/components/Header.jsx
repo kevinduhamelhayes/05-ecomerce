@@ -1,7 +1,7 @@
 import React from 'react'
 import { Filters } from './Filters.jsx'
 
-export function Header ( changeFilters ) {
+export function Header (changeFilters) {
   return (
     <header>
       <h1>My Store</h1>
