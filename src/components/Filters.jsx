@@ -1,9 +1,9 @@
-import './Filters.css'
 import { useId } from 'react'
 import { useFilters } from '../hooks/useFilters.js'
+import './Filters.css'
 
 export function Filters () {
-  const [filters ,setFilters] = useFilters()
+  const { filters, setFilters } = useFilters()
 
   const minPriceFilterId = useId()
   const categoryFilterId = useId()
@@ -15,7 +15,10 @@ export function Filters () {
     }))
   }
 
-  const handleCategory = (event) => {
+  const handleChangeCategory = (event) => {
+    // ⬇️ ESTO HUELE MAL
+    // estamos pasando la función de actualizar estado
+    // nativa de React a un componente hijo
     setFilters(prevState => ({
       ...prevState,
       category: event.target.value
@@ -23,31 +26,31 @@ export function Filters () {
   }
 
   return (
-    <section className="filters">
+    <section className='filters'>
 
       <div>
-        <label htmlFor={minPriceFilterId}>A partir de</label>
+        <label htmlFor={minPriceFilterId}>Precio a partir de:</label>
         <input
-        type="range"
-        name=""
-        id={minPriceFilterId}
-        min="0"
-        max="2000"
-        onChange={handleChangeMinPrice}
-        value={filters.minPrice}
+          type='range'
+          id={minPriceFilterId}
+          min='0'
+          max='1000'
+          onChange={handleChangeMinPrice}
+          value={filters.minPrice}
         />
         <span>${filters.minPrice}</span>
       </div>
-      <div>
-        <label htmlFor={categoryFilterId}>Categoria</label>
-        <select name="" id={categoryFilterId} onChange={handleCategory}>
-          <option value="all">All</option>
-          <option value="portatiles">Tech</option>
-          <option value="moviles">Celulares</option>
-          <option value="home">Home</option>
-        </select>
 
+      <div>
+        <label htmlFor={categoryFilterId}>Categoría</label>
+        <select id={categoryFilterId} onChange={handleChangeCategory}>
+          <option value='all'>Todas</option>
+          <option value='laptops'>Portátiles</option>
+          <option value='smartphones'>Celulares</option>
+        </select>
       </div>
+
     </section>
+
   )
 }
